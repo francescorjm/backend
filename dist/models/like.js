@@ -9,7 +9,7 @@ const likeSchema = new Schema({
     idEcho: {
         type: String,
         required: true,
-        ref: "Echo",
+        ref: "Tweet",
     },
     createdAt: {
         type: Date,

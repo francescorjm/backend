@@ -1,7 +1,7 @@
 var _a;
 import EchoModel from "../models/echo.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import FriendModel from "../models/friend.js";
+import FollowerModel from "../models/friend.js";
 import LikeModel from "../models/like.js";
 class EchoController {
     constructor() { }
@@ -58,8 +58,8 @@ EchoController.getFeed = async (req, res) => {
     const { userId } = req.params;
     const { lastEchoDate } = req.query;
     try {
-        const friendshipUsers = await FriendModel.find({ idUser: userId }).distinct("idFriendship");
-        let query = { idUser: { $in: friendshipUsers }, isDeleted: false, isReply: null };
+        const followingUsers = await FollowerModel.find({ idUser: userId }).distinct("idFriendship");
+        let query = { idUser: { $in: followingUsers }, isDeleted: false, isReply: null };
         if (lastEchoDate) {
             query.createdAt = { $lt: new Date(lastEchoDate) };
         }

@@ -23,6 +23,13 @@ const schemas = {
         userId: yup.string().required("User id is required"),
         isVerified: yup.boolean(),
     }),
+    createEchoSchema: sch({
+        userId: yup.string().required("User id is required"),
+        content: yup.string().required("Content is required"),
+        attachmentUrls: yup.array().of(yup.string()),
+        mentions: yup.array().of(yup.string()),
+        hashtags: yup.array().of(yup.string()),
+    }),
     replySchema: sch({
         userId: yup.string().required("User id is required"),
         content: yup.string().required("Content is required"),
@@ -35,16 +42,9 @@ const schemas = {
         userId: yup.string().required("User id is required"),
         echoId: yup.string().required("Post id is required"),
     }),
-    createEchoSchema: sch({
-        userId: yup.string().required("User id is required"),
-        content: yup.string().required("Content is required"),
-        attachmentUrls: yup.array().of(yup.string()),
-        mentions: yup.array().of(yup.string()),
-        hashtags: yup.array().of(yup.string()),
-    }),
     friendSchema: sch({
         userId: yup.string().required("User id is required"),
-        idFrienship: yup.string().required("Friendship user id is required"),
+        idFriend: yup.string().required("Following user id is required"),
     }),
 };
 export default schemas;
