@@ -1,0 +1,14 @@
+import { Router } from 'express';
+import schemas from '../validations/schemas.js';
+import validationYup from '../middlewares/validationYup.js';
+import friendController from '../controllers/friend.controller.js';
+import passport from 'passport';
+import attachUserId from '../middlewares/attachUserId.js';
+import validateUserIdToken from '../middlewares/validateUserId.js';
+let friendRouter = Router();
+friendRouter.use(passport.authenticate("jwt", { session: false }));
+friendRouter.use(attachUserId);
+friendRouter.use(validateUserIdToken);
+friendRouter.post("/friend", validationYup(schemas.friendSchema), friendController.friendUser);
+friendRouter.post("/unfriend", validationYup(schemas.friendSchema), friendController.unfriendUser);
+export default friendRouter;
